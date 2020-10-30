@@ -147,13 +147,17 @@ exports.getPlacesByUserId = (req, res, next) => {
 
 
 // create new place 
-exports.createPlace = (req, res, next) => { 
+exports.createPlace = async (req, res, next) => { 
     const error = validationResult(req);
     if(!error.isEmpty()){
         console.log(error);
         throw new HttpError("invalid inputs passed, please check the data", 422);
     }
-    const {title, description, coordinates, address, creator} = req.body;
+    const {title, description, address, creator} = req.body;
+   const  coordinates = {
+       lat:1,
+       lan:2,
+   }
     const createdPlace = {
         id:uuidv4(),
         description,
