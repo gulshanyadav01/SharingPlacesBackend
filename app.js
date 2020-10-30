@@ -1,5 +1,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const colors = require("colors");
+const dotenv = require("dotenv");
+const MongoDb = require("./config/db")
+
+dotenv.config();
+
+// connected to database 
+MongoDb();
+
+
 
 const placesRoutes = require("./routes/places-routes");
 const userRoutes = require("./routes/user-routes");
@@ -32,6 +42,6 @@ app.use((error, req, res, next) => {
 });
 
 
+const PORT = process.env.PORT || 5000
 
-
-app.listen(5000);
+app.listen(PORT, ()=> console.log(`connected to port ${PORT}`.rainbow.bold.underline));
